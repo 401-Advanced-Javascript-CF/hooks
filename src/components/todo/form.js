@@ -27,30 +27,14 @@ function TodoForm({handleSubmit}) {
           <Form.Label>To Do Item</Form.Label>
           <Form.Control type="text" placeholder="Add To Do List Item" onChange={handleInputChange} />
         </Form.Group>
-          {/* <label>
-            <span>To Do Item</span>
-            <input
-              name="text"
-              placeholder="Add To Do List Item"
-              onChange={handleInputChange}
-            />
-          </label> */}
         <Form.Group controlId="exampleForm.ControlInput2">
           <Form.Label>Difficult Rating</Form.Label>
           <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
         </Form.Group>
-          {/* <label>
-            <span>Difficulty Rating</span>
-            <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
-          </label> */}
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Assigned To</Form.Label>
           <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange} />
         </Form.Group>
-          {/* <label>
-            <span>Assigned To</span>
-            <input type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange} />
-          </label> */}
           <Button variant="primary" as="input" type="submit" value="Submit" />
         </Form>
       </>
