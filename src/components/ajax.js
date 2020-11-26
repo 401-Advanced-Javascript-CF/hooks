@@ -1,27 +1,25 @@
+import {useState} from 'react';
 import axios from 'axios';
 
-function ajax(){
+function useAjax(){
+const [list, setList] = useState([]);
 
 function get(http){
-    let obj = {};
-    axios.get(http)
+    let array = [];
+    axios.get('http://localhost:5051/api/v1/todo')
     .then(response => {
-      // setList(response.data);
       for(let ele of response.data){
-        obj.text = ele.todoitem;
-        obj.difficulty = ele.difficulty;
-        obj.assignee = ele.assigned;
-        obj.complete = ele.complete;
+        array.push({_id: ele._id, text: ele.todoitem, difficulty: ele.difficulty, assignee: ele.assigned, complete: ele.complete})
       }
-      
-    })
-    return obj;
+      setList(array);
+    });
 }
 
 return [
-    get
+  list,
+  get
 ]
 
 }
 
-export default ajax;
+export default useAjax;
