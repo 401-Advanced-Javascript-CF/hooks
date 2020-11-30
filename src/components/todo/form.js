@@ -3,20 +3,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function TodoForm({handleSubmit}) {
+function TodoForm(props) {
   const [item, setItem] = useState({});
-
+  console.log(item);
   function handleInputChange(e) {
-    setItem({ item: {...item, [e.target.name]: e.target.value } });
+    setItem({...item, [e.target.name]: e.target.value});
   };
 
-  handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     e.target.reset();
-    // eslint-disable-next-line
-    handleSubmit(item);
-    const item = {};
-    setItem(item);
+    console.log(props)
+    props.addItem(item);
+    setItem({});
   };
 
     return (
@@ -25,7 +24,7 @@ function TodoForm({handleSubmit}) {
         <Form onSubmit={handleSubmit}>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>To Do Item</Form.Label>
-          <Form.Control type="text" placeholder="Add To Do List Item" onChange={handleInputChange} />
+          <Form.Control name='text' type="text" placeholder="Add To Do List Item" onChange={handleInputChange} />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlInput2">
           <Form.Label>Difficult Rating</Form.Label>
