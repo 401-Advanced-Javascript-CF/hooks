@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
+import useAjax from '../ajax.js'
 
 import './todo.scss';
 
-const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
+function ToDo() {
 
-
-const ToDo = () => {
-
-  const [list, setList] = useState([]);
+  const [list, setList, get, post, put] = useAjax();
 
   function _addItem(item) {
-    item.due = new Date();
-    fetch(todoAPI, {
-      method: 'post',
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(item)
-    })
-      .then(response => response.json())
-      .then(savedItem => {
-        setList([...list, savedItem])
-      })
-      .catch(console.error);
+    console.log(item);
+    post(item);
   };
 
   function _toggleComplete(id) {
@@ -35,21 +22,7 @@ const ToDo = () => {
 
       item.complete = !item.complete;
 
-      let url = `${todoAPI}/${id}`;
-
-      fetch(url, {
-        method: 'put',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(item)
-      })
-        .then(response => response.json())
-        .then(savedItem => {
-          setList(list.map(listItem => listItem._id === item._id ? savedItem : listItem));
-        })
-        .catch(console.error);
-    }
+      put(item);
   };
 
   function _getTodoItems() {
@@ -75,7 +48,7 @@ const ToDo = () => {
       <section className="todo">
 
         <div>
-          <TodoForm handleSubmit={_addItem} />
+          <TodoForm addItem={_addItem} />
         </div>
 
         <div>
@@ -88,5 +61,5 @@ const ToDo = () => {
     </>
   );
 };
-
+}
 export default ToDo;

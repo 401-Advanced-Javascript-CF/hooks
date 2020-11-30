@@ -1,7 +1,7 @@
 import React from 'react';
 
-function TodoList({list, handleComplete}) {
-
+function TodoList({list, handleComplete, handleDelete}) {
+    console.log(list);
     return (
       <ul>
         {list.map(item => (
@@ -11,6 +11,7 @@ function TodoList({list, handleComplete}) {
           >
             <span onClick={() => handleComplete(item._id)}>
               {item.text}
+              <h5 onClick={() => handleDelete(item._id)}>X</h5>
             </span>
           </li>
         ))}
